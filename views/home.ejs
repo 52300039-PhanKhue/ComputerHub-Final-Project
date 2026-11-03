@@ -1,0 +1,79 @@
+<%- include('partials/header',{title:'ComputerHub - Máy tính & linh kiện'}) %>
+<% const featured = newProducts.find(p=>p.slug==='nova-gaming-16') || newProducts[0] || best[0]; %>
+<section class="hero hero-v4 reveal">
+  <div class="hero-copy">
+    <span class="eyebrow">ComputerHub • Công nghệ cho học tập & sáng tạo</span>
+    <h1 class="display">Chọn máy dễ hơn.<br><span class="gradient-text">Mua sắm thông minh hơn.</span></h1>
+    <p class="lead">Laptop, màn hình và linh kiện được trình bày rõ cấu hình, biến thể, giá, tồn kho và đánh giá để bạn so sánh nhanh mà không phải đoán.</p>
+    <div class="hero-actions">
+      <a class="btn" href="/products">Khám phá sản phẩm <span aria-hidden="true">→</span></a>
+      <a class="btn secondary" href="/products?sort=price_asc">Xem từ giá thấp</a>
+    </div>
+    <div class="hero-proof">
+      <span><b>✓</b> Giá hiển thị rõ ràng</span>
+      <span><b>✓</b> Tồn kho theo biến thể</span>
+      <span><b>✓</b> Checkout khách hoặc thành viên</span>
+    </div>
+  </div>
+  <% if(featured){ %>
+  <a class="featured-product" href="/products/<%= featured.slug %>" aria-label="Xem <%= featured.name %>">
+    <div class="featured-top"><span class="featured-tag">Nổi bật hôm nay</span><span class="featured-save">SAVE5 −5%</span></div>
+    <div class="featured-image-wrap"><img src="<%= featured.image %>" alt="<%= featured.name %>"></div>
+    <div class="featured-info">
+      <div><small><%= featured.brand %> • <%= featured.category_name %></small><h2><%= featured.name %></h2></div>
+      <div class="featured-price"><span>Từ</span><b><%= money(featured.base_price) %></b></div>
+    </div>
+    <div class="featured-bottom"><span>★★★★★ <%= Number(featured.rating||0).toFixed(1) %></span><span>Xem chi tiết →</span></div>
+  </a>
+  <% } %>
+</section>
+
+<section class="trust-strip reveal" aria-label="Cam kết dịch vụ">
+  <div class="trust-item"><span class="trust-icon">🚚</span><div><b>Miễn phí vận chuyển</b><span>Cho đơn hàng từ 20 triệu</span></div></div>
+  <div class="trust-item"><span class="trust-icon">🧩</span><div><b>Biến thể rõ ràng</b><span>Giá và tồn kho độc lập</span></div></div>
+  <div class="trust-item"><span class="trust-icon">🔒</span><div><b>Thanh toán an toàn</b><span>Server kiểm tra lại giá & tồn kho</span></div></div>
+  <div class="trust-item"><span class="trust-icon">★</span><div><b>Tích điểm thành viên</b><span>Dùng ngay ở đơn kế tiếp</span></div></div>
+</section>
+
+<section class="home-section">
+  <div class="section-head"><div class="section-head-copy"><span class="kicker">Khám phá nhanh</span><h2 class="section-title">Bạn đang tìm gì?</h2><p>Đi thẳng đến nhóm sản phẩm phù hợp với nhu cầu.</p></div><a class="section-link" href="/products">Xem tất cả sản phẩm →</a></div>
+  <% const icons={'laptops':'💻','monitors':'🖥️','graphics-cards':'🎮','processors':'⚙️','storage':'💾','memory':'🧠'}; %>
+  <% const notes={'laptops':'Học tập • Gaming • Văn phòng','monitors':'FHD • QHD • 4K','graphics-cards':'Gaming • Render • AI','processors':'Hiệu năng • Đa nhiệm','storage':'SSD • NVMe • HDD','memory':'DDR5 • Đa nhiệm'}; %>
+  <div class="category-grid category-grid-v4">
+    <% categories.forEach(c=>{ %>
+      <a class="category-card category-card-v4 reveal" href="/products?category=<%= c.slug %>">
+        <span class="category-icon"><%= icons[c.slug]||'⌁' %></span>
+        <div class="category-copy"><b><%= c.name %></b><small><%= notes[c.slug]||'Khám phá sản phẩm' %></small><span><%= c.product_count %> sản phẩm <i>→</i></span></div>
+      </a>
+    <% }) %>
+  </div>
+</section>
+
+<section class="home-section">
+  <div class="section-head"><div class="section-head-copy"><span class="kicker">Vừa lên kệ</span><h2 class="section-title">Sản phẩm mới</h2><p>Các lựa chọn mới cho học tập, gaming, lập trình và sáng tạo nội dung.</p></div><a class="section-link" href="/products?sort=name_asc">Mở catalog →</a></div>
+  <div class="grid"><% newProducts.forEach(p=>{ %><%- include('partials/product-card',{p}) %><% }) %></div>
+</section>
+
+<section class="promo-band promo-band-v4 reveal">
+  <div class="promo-copy"><span class="promo-eyebrow">Ưu đãi demo</span><h3>Giảm 5% với mã <strong>SAVE5</strong></h3><p>Nhập mã ở checkout để xem ngay số tiền được giảm trước khi xác nhận đơn hàng.</p><a class="btn secondary" href="/products">Chọn sản phẩm</a></div>
+  <div class="coupon-card"><span>MÃ ƯU ĐÃI</span><strong>SAVE5</strong><small>Giảm 5% • Tối đa 10 lượt dùng</small></div>
+</section>
+
+<section class="home-section">
+  <div class="section-head"><div class="section-head-copy"><span class="kicker">Được chọn nhiều</span><h2 class="section-title">Bán chạy</h2><p>Những sản phẩm có lượng mua nổi bật trong dữ liệu cửa hàng.</p></div><a class="section-link" href="/products?sort=price_desc">Xem thêm →</a></div>
+  <div class="grid"><% best.forEach(p=>{ %><%- include('partials/product-card',{p}) %><% }) %></div>
+</section>
+
+<% categorySections.forEach((section,index)=>{ %>
+<section class="category-product-section home-section reveal">
+  <div class="section-head"><div class="section-head-copy"><span class="kicker">Danh mục <%= String(index+1).padStart(2,'0') %></span><h2 class="section-title"><%= section.category.name %></h2><p>Sản phẩm nổi bật trong nhóm <%= section.category.name.toLowerCase() %>, có thể xem thêm đầy đủ trong catalog.</p></div><a class="section-link" href="/products?category=<%= section.category.slug %>">Xem toàn bộ →</a></div>
+  <div class="grid compact-grid"><% section.products.forEach(p=>{ %><%- include('partials/product-card',{p}) %><% }) %></div>
+</section>
+<% }) %>
+
+<section class="service-grid service-grid-v4 reveal">
+  <div class="service-card"><span class="service-num">01</span><span class="service-icon">🧭</span><h3>Tìm đúng sản phẩm</h3><p>Tìm kiếm, lọc thương hiệu, danh mục, giá, rating và sắp xếp theo tên hoặc giá.</p></div>
+  <div class="service-card"><span class="service-num">02</span><span class="service-icon">🛒</span><h3>Mua hàng linh hoạt</h3><p>Giỏ hàng cập nhật tức thời, hỗ trợ guest checkout và tài khoản khách hàng.</p></div>
+  <div class="service-card"><span class="service-num">03</span><span class="service-icon">📦</span><h3>Theo dõi rõ ràng</h3><p>Lịch sử đơn, trạng thái theo thời gian, email xác nhận và tích điểm thành viên.</p></div>
+</section>
+<%- include('partials/footer') %>

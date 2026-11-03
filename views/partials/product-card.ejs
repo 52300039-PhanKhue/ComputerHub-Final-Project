@@ -1,0 +1,17 @@
+<article class="product-card reveal">
+  <a class="product-media" href="/products/<%= p.slug %>">
+    <img src="<%= p.image || '/images/products/placeholder-1.svg' %>" alt="<%= p.name %>" loading="lazy">
+    <div class="product-badges">
+      <% if(p.is_new){ %><span class="badge">Mới</span><% } %>
+      <% if(Number(p.sold_count||0)>=60){ %><span class="badge success">Bán chạy</span><% } %>
+    </div>
+  </a>
+  <div class="product-body">
+    <div class="product-brand"><span><%= p.brand %></span><span>•</span><span><%= p.category_name %></span></div>
+    <h3><a href="/products/<%= p.slug %>"><%= p.name %></a></h3>
+    <p class="product-desc"><%= p.short_description %></p>
+    <div class="product-rating"><span class="stars" aria-label="Đánh giá <%= Number(p.rating||0).toFixed(1) %> trên 5"><%= Number(p.rating||0)>=1?'★':'☆' %><%= Number(p.rating||0)>=2?'★':'☆' %><%= Number(p.rating||0)>=3?'★':'☆' %><%= Number(p.rating||0)>=4?'★':'☆' %><%= Number(p.rating||0)>=5?'★':'☆' %></span><span><%= Number(p.rating||0)>0?Number(p.rating).toFixed(1):'Chưa có' %> · <%= p.review_count||0 %> đánh giá</span></div>
+    <div class="product-meta-row"><span>Kho theo phiên bản</span><span>Chi tiết cấu hình</span></div>
+    <div class="product-bottom"><div><small class="muted">Giá từ</small><div class="price"><%= money(p.base_price) %></div></div><a class="product-arrow" href="/products/<%= p.slug %>"><span>Xem chi tiết</span><b>→</b></a></div>
+  </div>
+</article>

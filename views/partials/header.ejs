@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="ComputerHub - cửa hàng máy tính và linh kiện với trải nghiệm mua sắm hiện đại.">
+  <meta name="csrf-token" content="<%= csrfToken || '' %>">
+  <meta name="theme-color" content="#375dfb">
+  <title><%= title || 'ComputerHub' %></title>
+  <script>
+    (function(){try{var t=localStorage.getItem('computerhub_theme');if(!t&&window.matchMedia('(prefers-color-scheme: dark)').matches)t='dark';document.documentElement.dataset.theme=t||'light';}catch(e){document.documentElement.dataset.theme='light';}})();
+  </script>
+  <link rel="stylesheet" href="/css/app.css">
+  <script defer src="/js/app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Bỏ qua điều hướng</a>
+  <div class="announcement">
+    <div class="announcement-inner">
+      <span><b>🚚 Miễn phí vận chuyển</b> cho đơn từ 20.000.000đ</span>
+      <span class="announcement-dot">•</span>
+      <span>🎟️ Mã demo: <b>SAVE5</b></span>
+      <span class="announcement-dot">•</span>
+      <span>✨ Light / Dark mode</span>
+    </div>
+  </div>
+  <header class="site-header">
+    <div class="nav-shell">
+      <a class="brand" href="/" aria-label="ComputerHub trang chủ">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand-word">COMPUTER<span>HUB</span></span>
+      </a>
+      <form class="search" action="/products" role="search">
+        <input name="q" value="<%= typeof filters !== 'undefined' ? (filters.q || '') : '' %>" placeholder="Tìm laptop, màn hình, CPU, RAM, SSD..." aria-label="Tìm kiếm sản phẩm" autocomplete="off">
+        <button aria-label="Tìm kiếm" title="Tìm kiếm">⌕</button>
+      </form>
+      <div class="header-actions">
+        <nav class="site-nav" id="siteNav" aria-label="Điều hướng chính">
+          <a class="nav-link <%= path==='/products'?'active':'' %>" href="/products"><span>▦</span><span class="nav-label">Sản phẩm</span></a>
+          <a class="nav-link cart-link <%= path==='/cart'?'active':'' %>" href="/cart"><span>🛒</span><span class="nav-label">Giỏ hàng</span><b class="cart-count" id="cartCount">0</b></a>
+          <% if(user){ %>
+            <a class="nav-link <%= path==='/profile'?'active':'' %>" href="/profile"><span>◉</span><span class="nav-label"><%= user.full_name.split(' ')[0] %></span></a>
+            <% if(user.role==='admin'){ %><a class="nav-link <%= path.startsWith('/admin')?'active':'' %>" href="/admin"><span>⌘</span><span class="nav-label">Admin</span></a><% } %>
+            <form class="nav-form" method="post" action="/logout"><input type="hidden" name="_csrf" value="<%= csrfToken %>"><button class="nav-link nav-button" type="submit"><span>↗</span><span class="nav-label">Đăng xuất</span></button></form>
+          <% } else { %>
+            <a class="nav-link <%= path==='/login'?'active':'' %>" href="/login"><span>◉</span><span class="nav-label">Đăng nhập</span></a>
+          <% } %>
+        </nav>
+        <button class="icon-btn theme-toggle" id="themeToggle" type="button" aria-label="Đổi giao diện sáng tối" title="Đổi giao diện sáng / tối"><span class="moon">☾</span><span class="sun">☀</span></button>
+        <button class="icon-btn mobile-toggle" id="mobileNavToggle" type="button" aria-label="Mở menu" aria-controls="siteNav" aria-expanded="false">☰</button>
+      </div>
+    </div>
+    <div class="category-nav" aria-label="Danh mục sản phẩm">
+      <div class="category-nav-inner">
+        <a href="/products?category=laptops">💻 Laptop</a>
+        <a href="/products?category=monitors">🖥️ Màn hình</a>
+        <a href="/products?category=graphics-cards">🎮 Card đồ họa</a>
+        <a href="/products?category=processors">⚙️ CPU</a>
+        <a href="/products?category=storage">💾 Lưu trữ</a>
+        <a href="/products?category=memory">🧠 RAM</a>
+      </div>
+    </div>
+  </header>
+  <main class="page-shell" id="main-content">
+    <% if(flash){ %><div class="flash" role="status">✓ <span><%= flash %></span></div><% } %>

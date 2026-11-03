@@ -1,0 +1,23 @@
+KIỂM TRA THỰC TẾ VÀ GIỚI HẠN - PHAN KHUÊ 52300039
+
+Các bài đã CHẠY ở môi trường kiểm tra ngày 30/10/2026:
+- npm run verify:syntax: PASS
+- npm run test:quantity: PASS
+- npm run test:ui-regression: PASS (7 phép soát logic trên mã nguồn)
+- node kiem_tra_rubric.js: PASS 13 mục rà soát HIỆN DIỆN, còn 7 mục CHECK.
+
+Các bài CHƯA CHẠY THÀNH CÔNG Ở MÔI TRƯỜNG KIỂM TRA:
+- npm ci bị timeout do môi trường, nên npm run test:static không thể tải ejs.
+- npm test cần MongoDB Atlas URI thật và có kết nối mạng.
+- Google OAuth, SMTP, Docker runtime, giao diện trình duyệt, phân quyền nhiều thiết bị.
+- demo.mp4 1080p có âm thanh chưa có; Rubrik.docx trong hồ sơ chỉ là bản tự đánh giá tạm.
+
+Không có cách đưa mật khẩu Atlas của người dùng vào ZIP mà không biết mật khẩu;
+kể cả biết cũng KHÔNG AN TOÀN khi chia sẻ hoặc nộp mã nguồn.
+Để chạy LOCAL, hãy sao chép .env từ dự án cũ.
+Docker được giữ trong mã nguồn vì PDF đòi triển khai bằng hosting hoặc Docker Compose.
+MongoDB vẫn là DB duy nhất, không có SQL.
+
+Theo PDF, người làm một mình không nhận 0.5 điểm teamwork theo rubric (trừ khi
+thầy có quy định riêng); việc được phép nộp cá nhân không đồng nghĩa bảo đảm 10.
+BẢN NÀY KHÔNG ĐƯỢC CHỨNG NHẬN 10/10; điểm do giảng viên quyết định.

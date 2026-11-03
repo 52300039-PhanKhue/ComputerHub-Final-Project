@@ -1,0 +1,22 @@
+<%- include('partials/header',{title:'Sản phẩm - ComputerHub'}) %>
+<section class="catalog-hero reveal"><span class="kicker">Computer catalog</span><h1 class="page-title">Tìm cấu hình phù hợp với bạn</h1><p>Tìm kiếm, lọc theo thương hiệu, mức giá, đánh giá và sắp xếp theo 4 tiêu chí bắt buộc.</p></section>
+<div class="layout">
+  <aside class="filter" id="catalogFilter">
+    <div class="filter-head"><h3>Bộ lọc sản phẩm</h3><a class="small link" href="/products">Xóa lọc</a></div>
+    <form>
+      <label class="filter-label" for="filterQ">Từ khóa</label><input id="filterQ" name="q" value="<%= filters.q||'' %>" placeholder="Tên, mô tả, thương hiệu">
+      <label class="filter-label" for="filterCategory">Danh mục</label><select id="filterCategory" name="category"><option value="">Tất cả danh mục</option><% categories.forEach(c=>{ %><option value="<%= c.slug %>" <%= filters.category===c.slug?'selected':'' %>><%= c.name %></option><% }) %></select>
+      <label class="filter-label" for="filterBrand">Thương hiệu</label><select id="filterBrand" name="brand"><option value="">Tất cả thương hiệu</option><% brands.forEach(b=>{ %><option value="<%= b.brand %>" <%= filters.brand===b.brand?'selected':'' %>><%= b.brand %></option><% }) %></select>
+      <label class="filter-label">Khoảng giá</label><div class="range"><input type="number" name="min" min="0" value="<%= filters.min||'' %>" placeholder="Từ"><input type="number" name="max" min="0" value="<%= filters.max||'' %>" placeholder="Đến"></div>
+      <label class="filter-label" for="filterRating">Đánh giá</label><select id="filterRating" name="rating"><option value="">Mọi đánh giá</option><option value="4" <%= filters.rating==='4'?'selected':'' %>>Từ 4★</option><option value="3" <%= filters.rating==='3'?'selected':'' %>>Từ 3★</option><option value="2" <%= filters.rating==='2'?'selected':'' %>>Từ 2★</option></select>
+      <label class="filter-label" for="filterSort">Sắp xếp</label><select id="filterSort" name="sort"><option value="name_asc" <%= !filters.sort||filters.sort==='name_asc'?'selected':'' %>>Tên A → Z</option><option value="name_desc" <%= filters.sort==='name_desc'?'selected':'' %>>Tên Z → A</option><option value="price_asc" <%= filters.sort==='price_asc'?'selected':'' %>>Giá thấp → cao</option><option value="price_desc" <%= filters.sort==='price_desc'?'selected':'' %>>Giá cao → thấp</option></select>
+      <div class="filter-actions"><a class="btn secondary" href="/products">Đặt lại</a><button class="btn">Áp dụng</button></div>
+    </form>
+  </aside>
+  <section class="grow">
+    <div class="catalog-toolbar"><div><h2 style="margin:0">Tất cả sản phẩm</h2><div class="muted"><b><%= total %></b> kết quả • Trang <%= page %>/<%= pages %></div></div><div class="button-row"><button class="btn secondary mobile-filter-btn" id="filterToggle" type="button">☰ Bộ lọc</button></div></div>
+    <% if(products.length){ %><div class="grid"><% products.forEach(p=>{ %><%- include('partials/product-card',{p}) %><% }) %></div><% } else { %><div class="empty-state"><div class="empty-icon">⌕</div><h3>Không tìm thấy sản phẩm</h3><p>Thử bỏ bớt bộ lọc hoặc thay đổi từ khóa tìm kiếm.</p><a class="btn" href="/products">Xem toàn bộ sản phẩm</a></div><% } %>
+    <div class="pagination"><% for(let i=1;i<=pages;i++){ %><a class="<%= i===page?'active':'' %>" href="?<%= new URLSearchParams({...filters,page:i}).toString() %>"><%= i %></a><% } %></div>
+  </section>
+</div>
+<%- include('partials/footer') %>

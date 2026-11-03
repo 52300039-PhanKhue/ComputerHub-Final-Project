@@ -1,0 +1,127 @@
+# Grading: docker compose up -d
+# By default MongoDB runs locally in Docker with a single-node replica set.
+# This is independent of the local Windows MONGODB_URI in .env (Atlas).
+services:
+  mongodb:
+    image: mongo:7
+    command: ["mongod", "--replSet", "rs0", "--bind_ip_all", "--noauth"]
+    volumes:
+      - mongo_data:/data/db
+    healthcheck:
+      test: ["CMD-SHELL", "mongosh --quiet --eval 'db.adminCommand({ping:1}).ok' | grep 1"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+    restart: unless-stopped
+
+  mongodb-init:
+    image: mongo:7
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    command: ["mongosh", "mongodb://mongodb:27017/admin?directConnection=true", "/scripts/mongo-init.js"]
+    volumes:
+      - ./docker/mongo-init.js:/scripts/mongo-init.js:ro
+    restart: "no"
+
+  init:
+    build: .
+    command: ["node", "src/seed.js"]
+    environment:
+      NODE_ENV: production
+      MONGODB_URI: ${DOCKER_MONGODB_URI:-mongodb://mongodb:27017/computerhub_v6?replicaSet=rs0}
+      MONGODB_DB_NAME: ${MONGODB_DB_NAME:-computerhub_v6}
+      JWT_SECRET: ${JWT_SECRET:-computerhub-local-demo-secret-change-in-production-2026}
+      ADMIN_EMAIL: ${ADMIN_EMAIL:-admin@computerhub.vn}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-Admin@123456}
+    depends_on:
+      mongodb-init:
+        condition: service_completed_successfully
+    restart: "no"
+
+  web1:
+    build: .
+    command: ["node", "src/server.js"]
+    environment: &app_env
+      NODE_ENV: production
+      PORT: 3000
+      COOKIE_SECURE: "false"
+      BASE_URL: ${BASE_URL:-http://localhost:3000}
+      MONGODB_URI: ${DOCKER_MONGODB_URI:-mongodb://mongodb:27017/computerhub_v6?replicaSet=rs0}
+      MONGODB_DB_NAME: ${MONGODB_DB_NAME:-computerhub_v6}
+      JWT_SECRET: ${JWT_SECRET:-computerhub-local-demo-secret-change-in-production-2026}
+      ADMIN_EMAIL: ${ADMIN_EMAIL:-admin@computerhub.vn}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-Admin@123456}
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID:-}
+      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET:-}
+      SMTP_HOST: mailpit
+      SMTP_PORT: 1025
+      SMTP_USER: ""
+      SMTP_PASS: ""
+      MAIL_FROM: "ComputerHub <no-reply@computerhub.local>"
+      REDIS_URL: redis://redis:6379
+      INSTANCE_ID: web1
+    depends_on:
+      init:
+        condition: service_completed_successfully
+      redis:
+        condition: service_started
+      mailpit:
+        condition: service_started
+    expose:
+      - "3000"
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:3000/health').then(r=>r.json()).then(x=>{if(!x.ok||!x.mongoReady)process.exit(1)}).catch(()=>process.exit(1))"]
+      interval: 10s
+      timeout: 3s
+      retries: 10
+    restart: unless-stopped
+
+  web2:
+    build: .
+    command: ["node", "src/server.js"]
+    environment:
+      <<: *app_env
+      INSTANCE_ID: web2
+    depends_on:
+      init:
+        condition: service_completed_successfully
+      redis:
+        condition: service_started
+      mailpit:
+        condition: service_started
+    expose:
+      - "3000"
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:3000/health').then(r=>r.json()).then(x=>{if(!x.ok||!x.mongoReady)process.exit(1)}).catch(()=>process.exit(1))"]
+      interval: 10s
+      timeout: 3s
+      retries: 10
+    restart: unless-stopped
+
+  nginx:
+    image: nginx:1.27-alpine
+    ports:
+      - "3000:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      web1:
+        condition: service_healthy
+      web2:
+        condition: service_healthy
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    command: ["redis-server", "--save", "", "--appendonly", "no"]
+    restart: unless-stopped
+
+  mailpit:
+    image: axllent/mailpit:latest
+    ports:
+      - "8025:8025"
+    restart: unless-stopped
+
+volumes:
+  mongo_data:

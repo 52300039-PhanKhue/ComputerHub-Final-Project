@@ -1,0 +1,8 @@
+<%- include('partials/header',{title:(typeof serverError!=='undefined'&&serverError)?'500 - ComputerHub':'404 - ComputerHub'}) %>
+<div class="empty-state" style="margin:60px auto;max-width:720px">
+  <div class="empty-icon"><%= (typeof serverError!=='undefined'&&serverError)?'500':'404' %></div>
+  <h1><%= (typeof serverError!=='undefined'&&serverError)?'Đã có lỗi phía máy chủ':'Trang này không tồn tại' %></h1>
+  <p><%= (typeof serverError!=='undefined'&&serverError)?'Hệ thống đã ghi nhận lỗi. Hãy quay lại trang chủ hoặc thử lại sau.':'Liên kết có thể đã thay đổi hoặc nội dung không còn khả dụng.' %></p>
+  <div class="button-row" style="justify-content:center"><a class="btn" href="/">Về trang chủ</a><a class="btn secondary" href="/products">Xem sản phẩm</a></div>
+</div>
+<%- include('partials/footer') %>

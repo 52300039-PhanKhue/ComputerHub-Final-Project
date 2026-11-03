@@ -1,0 +1,25 @@
+COMPUTERHUB V6.2 - HƯỚNG DẪN CHÍNH XÁC (CÁ NHÂN)
+Sinh viên: Phan Khuê, MSSV 52300039, lớp 23050261, khóa 27.
+Stack: Node.js + Express + EJS + MongoDB Atlas. KHÔNG DÙNG SQL.
+
+BẠN DÙNG MONGODB ATLAS THÌ LÀM NHƯ SAU:
+- Mở thư mục source/.
+- Copy file .env CŨ từ dự án ComputerHub đang chạy tốt sang đây.
+- Nếu không có .env cũ: chạy CAU_HINH_MONGODB_ATLAS.cmd để tạo .env
+  và điền MONGODB_URI chính xác của bạn.
+- Chạy CHAY_VOI_MONGODB_ATLAS.cmd; mở localhost:3000/health.
+- Chạy TEST_OFFLINE_NHANH.cmd để kiểm tra mã không cần database.
+- Test integration sau khi cấu hình đủ: npm test (dùng database riêng).
+
+VÌ SAO ZIP KHÔNG CÓ .env THẬT?
+Vì .env chứa password/URI Atlas và JWT_SECRET. Không thể tự tạo URI thật
+của bạn khi không có credential; đóng gói file đó sẽ làm lộ mật khẩu.
+Chỉ sao chép từ dự án cũ hoặc tự nhập trong file .env trên máy bạn.
+
+Docker có sẵn vì yêu cầu triển khai của PDF (hosting HOẶC Docker Compose),
+không phải SQL và không phải cách chạy local bắt buộc.
+
+KHÔNG thể kết luận 10/10 chỉ vì test cú pháp PASS.
+Còn cần xác thực giao dịch end-to-end, SMTP/Google, Docker/hosting,
+video demo 1080p có tiếng, rubric chính thức và minh chứng phù hợp.
+Đừng chạy npm run seed với database đang có đơn hàng thật nếu chưa sao lưu.

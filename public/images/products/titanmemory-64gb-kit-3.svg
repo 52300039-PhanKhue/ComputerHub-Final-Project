@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="620" viewBox="0 0 900 620" role="img" aria-label="TITANMEMORY 64GB KIT image 3">
+<defs>
+ <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f59e0b" stop-opacity=".26"/><stop offset="1" stop-color="#fb7185" stop-opacity=".09"/></linearGradient>
+ <linearGradient id="screen" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f59e0b"/><stop offset=".5" stop-color="#111827"/><stop offset="1" stop-color="#fb7185"/></linearGradient>
+ <linearGradient id="chip" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f59e0b"/><stop offset="1" stop-color="#fb7185"/></linearGradient>
+ <filter id="shadow"><feDropShadow dx="0" dy="22" stdDeviation="20" flood-opacity=".25"/></filter>
+</defs>
+<rect width="900" height="620" rx="42" fill="#f8fafc"/><circle cx="90" cy="95" r="180" fill="url(#bg)"/><circle cx="820" cy="550" r="230" fill="url(#bg)"/><path d="M0 520C220 450 440 590 900 460V620H0Z" fill="#f59e0b" opacity=".05"/>
+<g filter="url(#shadow)"><g transform="translate(145 155) rotate(3 255 85)"><rect x="0" y="0" width="510" height="170" rx="24" fill="#111827" stroke="#f59e0b" stroke-width="8"/><rect x="35" y="38" width="440" height="94" rx="14" fill="#1e293b"/><g fill="#fb7185"><rect x="55" y="54" width="46" height="62" rx="7"/><rect x="117" y="54" width="46" height="62" rx="7"/><rect x="179" y="54" width="46" height="62" rx="7"/><rect x="241" y="54" width="46" height="62" rx="7"/><rect x="303" y="54" width="46" height="62" rx="7"/><rect x="365" y="54" width="46" height="62" rx="7"/><rect x="427" y="54" width="46" height="62" rx="7"/></g><path d="M40 170v26M105 170v26M170 170v26M235 170v26M300 170v26M365 170v26M430 170v26" stroke="#eab308" stroke-width="11"/></g></g>
+<rect x="44" y="42" width="118" height="34" rx="17" fill="#f59e0b" opacity=".12"/><text x="103" y="65" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#f59e0b">COMPUTERHUB</text>
+<text x="450" y="565" text-anchor="middle" font-family="Arial, sans-serif" font-size="25" font-weight="800" fill="#0f172a">TITANMEMORY 64GB KIT</text>
+</svg>

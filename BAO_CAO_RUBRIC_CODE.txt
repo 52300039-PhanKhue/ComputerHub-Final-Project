@@ -1,0 +1,26 @@
+KET QUA KIEM TRA SO BO CODE THEO RUBRIC (khong thay the chay browser)
+PASS: 13  FAIL: 0  CAN THU THEM: 7
+
+[PASS] Da mo dung thu muc du an - Can dat 2 file test cung cap vao thu muc co package.json.
+[PASS] Trang chu New Products, Best Sellers va 3 nhom san pham
+[PASS] Danh sach catalog co phan trang va 4 che do sap xep
+[PASS] Co loc category, brand, min, max, rating
+[PASS] Du lieu mau 2 bien the Standard Premium + 3 anh
+[PASS] Co API tao don + MongoDB transaction
+[PASS] Tinh diem 10% (1 diem = 1000d)
+[PASS] Ma giam gia dung 5 ky tu chu/so
+[PASS] API checkout chan so luong thap phan / 0 / am - Co the tao don voi so luong 1.5; can them validate nguyen duong truoc khi giao dich.
+[PASS] Dang ky chi nhap email, ho ten, dia chi
+[PASS] Co realtime review qua Socket.IO
+[PASS] Co quan tri dashboard, san pham, khach, don, coupon
+[PASS] Co Docker Compose + nginx + 2 web + Redis + Mailpit
+[CHECK] MONGODB_URI - ZIP an toan khong kem .env; tren Windows can tao .env rieng theo .env.example de chay npm start/npm test. Docker mac dinh dung MongoDB container.
+[CHECK] Google OAuth - Chua thiet lap credentials; nut Google se bi vo hieu, mat muc diem Social Login neu khong bo sung.
+[CHECK] Email xac nhan + quen mat khau - Chay Docker Mailpit/SMTP va thu email; npm test hien tai KHONG kiem tra email.
+[CHECK] demo.mp4 - Chua tim thay trong thu muc source; can dua vao thu muc nop bai cap tren.
+[CHECK] Rubrik.docx - Chua tim thay trong thu muc source; can dua vao thu muc nop bai cap tren.
+[CHECK] git/ proof - Chua tim thay trong thu muc source; can dua vao thu muc nop bai cap tren.
+[CHECK] Trinh duyet / mobile / Docker THUC TE - Khong the ket luan bang kiem tra tinh: can demo browser, OAuth, email, scaling, mobile va checklist nop bai.
+
+NOTE: Automated smoke test la npm test; no dung MongoDB tam va xoa database test sau khi chay.
+NOTE: Thu nghiem tren browser va Docker + day du file nop bai can xac nhan rieng.

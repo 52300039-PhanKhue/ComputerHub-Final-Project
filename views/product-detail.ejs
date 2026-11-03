@@ -1,0 +1,42 @@
+<%- include('partials/header',{title:product.name+' - ComputerHub'}) %>
+<nav class="breadcrumbs"><a href="/">Trang chủ</a><span>›</span><a href="/products">Sản phẩm</a><span>›</span><a href="/products?category=<%= product.category_slug %>"><%= product.category_name %></a><span>›</span><span><%= product.name %></span></nav>
+<section class="product-detail">
+  <div class="gallery-card reveal">
+    <img class="main-img" src="<%= product.images[0]?.url || '/images/products/placeholder-1.svg' %>" alt="<%= product.name %>">
+    <div class="thumbs"><% product.images.forEach((img,index)=>{ %><button class="thumb <%= index===0?'active':'' %>" type="button"><img src="<%= img.url %>" alt="Ảnh <%= index+1 %> của <%= product.name %>"></button><% }) %></div>
+  </div>
+  <div class="product-info reveal">
+    <div class="button-row"><span class="pill"><%= product.category_name %></span><% if(product.is_new){ %><span class="badge success">Sản phẩm mới</span><% } %></div>
+    <h1><%= product.name %></h1>
+    <div class="product-rating-line"><span class="stars" id="ratingStarsTop"><%= Number(ratingSummary.average)>=1?'★':'☆' %><%= Number(ratingSummary.average)>=2?'★':'☆' %><%= Number(ratingSummary.average)>=3?'★':'☆' %><%= Number(ratingSummary.average)>=4?'★':'☆' %><%= Number(ratingSummary.average)>=5?'★':'☆' %></span><b id="ratingAverageTop"><%= Number(ratingSummary.average||0).toFixed(1) %></b><span id="ratingCountTop"><%= ratingSummary.count %> lượt chấm sao</span><span>•</span><span>Thương hiệu <b><%= product.brand %></b></span></div>
+    <div class="detail-price" id="detailPrice"><%= money(product.variants[0]?.price || product.base_price) %></div>
+    <p class="lead" style="font-size:15px"><%= product.short_description %></p>
+    <ul class="feature-list"><% product.long_description.split('\n').filter(Boolean).forEach(line=>{ %><li><%= line %></li><% }) %></ul>
+    <div class="option-block">
+      <div class="option-head"><label for="variant">Chọn phiên bản</label><span class="stock-text" id="variantStock"></span></div>
+      <select id="variant"><% product.variants.forEach(v=>{ %><option value="<%= v.id %>" data-name="<%= v.name %>" data-price="<%= v.price %>" data-stock="<%= v.stock %>"><%= v.name %> — <%= money(v.price) %> — SKU: <%= v.sku %></option><% }) %></select>
+      <div class="buy-row"><input id="qty" type="number" min="1" value="1" aria-label="Số lượng"><button class="btn" id="addToCartBtn" type="button" data-product-id="<%= product.id %>" data-product-name="<%= product.name %>" data-product-image="<%= product.images[0]?.url || '/images/products/placeholder-1.svg' %>">🛒 Thêm vào giỏ hàng</button></div>
+    </div>
+    <div class="benefit-list"><div class="benefit"><b>🚚 Vận chuyển</b>Miễn phí từ 20 triệu</div><div class="benefit"><b>🔒 Thanh toán</b>Checkout rõ ràng, an toàn</div><div class="benefit"><b>★ Thành viên</b>Tích điểm cho đơn kế tiếp</div></div>
+  </div>
+</section>
+
+<section class="reviews reveal">
+  <div class="section-head"><div class="section-head-copy"><span class="kicker">Community</span><h2 class="section-title">Đánh giá & bình luận</h2><p>Bình luận không cần đăng nhập; chấm sao yêu cầu tài khoản.</p></div></div>
+  <div class="reviews-grid">
+    <aside>
+      <div class="panel rating-summary"><div class="rating-big" id="ratingAverageBox"><%= Number(ratingSummary.average||0).toFixed(1) %></div><div class="stars" id="ratingStarsBox"><%= Number(ratingSummary.average)>=1?'★':'☆' %><%= Number(ratingSummary.average)>=2?'★':'☆' %><%= Number(ratingSummary.average)>=3?'★':'☆' %><%= Number(ratingSummary.average)>=4?'★':'☆' %><%= Number(ratingSummary.average)>=5?'★':'☆' %></div><div class="muted" id="ratingCountBox"><%= ratingSummary.count %> lượt chấm sao</div></div>
+      <form method="post" action="/products/<%= product.id %>/reviews" class="panel review-form">
+        <h3>Chia sẻ trải nghiệm</h3>
+        <% if(!user){ %><input name="guest_name" placeholder="Tên hiển thị (không bắt buộc)"><% } %>
+        <textarea name="comment" placeholder="Bạn thấy sản phẩm này thế nào?" required></textarea>
+        <% if(user){ %><select name="rating"><option value="">Chỉ bình luận, không chấm sao</option><option value="5">★★★★★ — 5 sao</option><option value="4">★★★★☆ — 4 sao</option><option value="3">★★★☆☆ — 3 sao</option><option value="2">★★☆☆☆ — 2 sao</option><option value="1">★☆☆☆☆ — 1 sao</option></select><% } else { %><p class="small muted">Đăng nhập nếu bạn muốn chấm sao cho sản phẩm.</p><% } %>
+        <button class="btn">Gửi đánh giá</button>
+      </form>
+    </aside>
+    <div class="panel"><div id="reviewList"><% if(!reviews.length){ %><div class="empty-state"><div class="empty-icon">☆</div><h3>Chưa có bình luận</h3><p>Hãy là người đầu tiên chia sẻ trải nghiệm.</p></div><% } %><% reviews.forEach(r=>{ %><div class="review"><div class="review-head"><div class="review-user"><span class="avatar"><%= r.reviewer.slice(0,1).toUpperCase() %></span><div><b><%= r.reviewer %></b><small style="display:block"><%= dateTime(r.created_at) %></small></div></div><span class="stars"><%= r.rating?'★'.repeat(r.rating):'' %></span></div><p><%= r.comment %></p></div><% }) %></div></div>
+  </div>
+</section>
+<% if(related.length){ %><section class="related"><div class="section-head"><div class="section-head-copy"><span class="kicker">Có thể bạn thích</span><h2 class="section-title">Cùng danh mục</h2></div></div><div class="grid"><% related.forEach(p=>{ %><%- include('partials/product-card',{p}) %><% }) %></div></section><% } %>
+<script>window.productRoom=<%= product.id %>;</script>
+<%- include('partials/footer') %>

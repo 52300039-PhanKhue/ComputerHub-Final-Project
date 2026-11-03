@@ -1,0 +1,37 @@
+COMPUTERHUB V6.1 (BAN SUA) - HUONG DAN NGAN
+===============================================
+NHUNG GI DA SUA TRONG MA NGUON:
+1. API checkout tu choi so luong le (1.5), 0, am, tren 99 va gia tri khong hop le;
+   bao ve ton kho va don hang. Them test hoi quy vao tests/smoke.js.
+2. Giao dien gio hang lam tron xuong so luong khi nguoi dung nhap thap phan.
+3. Thay new:true trong findOneAndUpdate sang returnDocument: 'after'.
+4. Them script kiem tra mot lan va bo test so luong.
+5. Docker Compose co MongoDB replica set trong container (phu hop MongoDB transaction),
+   web1 + web2 + Nginx + Redis + Mailpit.
+6. XOA .env khoi ZIP de khong lo tai khoan MongoDB Atlas.
+
+CACH 1 - CHAY LOCAL BANG MONGODB ATLAS GIONG BAN DANG DUNG:
+1. Giai nen, mo thu muc ComputerHub_V6_1_DaSua (noi co package.json).
+2. Tu file .env.example, tao file .env trong thu muc nay (KHONG GUI cho ai).
+   Ban co the tu sao chep MONGODB_URI tu .env cu V6, khong phai gui cho ChatGPT.
+   Nen doi mat khau Atlas cu neu da chia se file .env truoc day.
+3. npm ci
+4. Nhap dup KIEM_TRA_1_LAN.cmd de kiem tra; test MongoDB can ket noi Atlas.
+5. npm start va mo http://localhost:3000.
+
+CACH 2 - DOCKER COMPOSE (CO MONGODB NOI BO; KHONG CAN ATLAS):
+1. Cai Docker Desktop, bat Docker Engine.
+2. Mo terminal tai thu muc co docker-compose.yml va nhap duy nhat:
+   docker compose up -d
+3. Mo http://localhost:3000 (web), http://localhost:8025 (Mailpit).
+4. Khi ket thuc: docker compose down (giu MongoDB volume).
+LUU Y: Docker chua duoc chay thuc te trong moi truong sua file nay.
+Mac dinh Docker se seed du lieu demo, co the reset password demo/admin va ma SAVE5
+khi service init chay lai. Khong chay tren du lieu that.
+
+CHUA HOAN TAT / PHAI TU KIEM TRA:
+- Google OAuth can GOOGLE_CLIENT_ID + GOOGLE_CLIENT_SECRET do ban tu tao.
+- Email local khong tu gui neu khong cau hinh SMTP; Docker co Mailpit de demo.
+- Co 3 canh bao High khi npm audit tren may cua ban, can audit lai va sua co kiem chung.
+- Can video demo.mp4, Rubrik.docx, minh chung git/, dong goi dung ten nhom.
+- Chua the cam ket 10 diem; thay quyet dinh theo rubric.

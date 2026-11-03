@@ -1,0 +1,28 @@
+<%- include('partials/header',{title:mode==='login'?'Đăng nhập - ComputerHub':'Đăng ký - ComputerHub'}) %>
+<section class="auth-shell reveal">
+  <aside class="auth-aside">
+    <span class="eyebrow" style="color:#a5f3fc">ComputerHub account</span>
+    <h2><%= mode==='login'?'Chào mừng bạn quay lại.':'Một tài khoản, toàn bộ lịch sử mua sắm.' %></h2>
+    <p>Quản lý địa chỉ, theo dõi trạng thái đơn hàng, tích điểm thành viên và chấm sao sản phẩm.</p>
+    <div class="auth-benefits">
+      <div class="auth-benefit"><span class="auth-check">✓</span><div><b>Nhiều địa chỉ giao hàng</b><span>Chọn địa chỉ mặc định và dùng nhanh ở checkout.</span></div></div>
+      <div class="auth-benefit"><span class="auth-check">✓</span><div><b>Lịch sử đơn hàng</b><span>Xem lại sản phẩm, tổng tiền và từng mốc trạng thái.</span></div></div>
+      <div class="auth-benefit"><span class="auth-check">✓</span><div><b>Điểm thành viên</b><span>Tích điểm theo giá trị đơn và dùng ngay ở đơn tiếp theo.</span></div></div>
+    </div>
+  </aside>
+  <div class="auth-card">
+    <h1><%= mode==='login'?'Đăng nhập':'Tạo tài khoản' %></h1>
+    <p class="muted"><%= mode==='login'?'Tiếp tục hành trình mua sắm của bạn.':'Điền thông tin cơ bản để bắt đầu.' %></p>
+    <% if(typeof error!=='undefined'){ %><div class="error"><%= error %></div><% } %>
+    <form method="post">
+      <% if(mode==='register'){ %><div><label>Họ và tên</label><input name="full_name" placeholder="Nguyễn Văn A" required></div><div><label>Địa chỉ giao hàng</label><input name="address" placeholder="Địa chỉ giao hàng ban đầu" required></div><% } %>
+      <div><label>Email</label><input type="email" name="email" placeholder="ban@example.com" required></div>
+      <% if(mode==='login'){ %><div><label>Mật khẩu</label><input type="password" name="password" minlength="8" placeholder="Mật khẩu của bạn" required></div><% } else { %><div class="alert small">Theo đúng yêu cầu đề, form đăng ký chỉ lấy email, họ tên và địa chỉ giao hàng. Sau khi tạo tài khoản, bạn đặt mật khẩu ở trang Hồ sơ.</div><% } %>
+      <button class="btn"><%= mode==='login'?'Đăng nhập →':'Tạo tài khoản →' %></button>
+    </form>
+    <div class="divider">hoặc</div>
+    <% if(googleOAuthEnabled){ %><a class="oauth" href="/auth/google">G&nbsp; Đăng nhập bằng Google</a><% } else { %><button class="oauth" type="button" disabled title="Cần GOOGLE_CLIENT_ID và GOOGLE_CLIENT_SECRET trong .env">G&nbsp; Google OAuth — cần cấu hình</button><% } %>
+    <% if(mode==='login'){ %><div class="button-row" style="justify-content:space-between;margin-top:16px"><a class="link small" href="/forgot-password">Quên mật khẩu?</a><span class="small muted">Demo: demo@computerhub.vn / Demo@123456</span></div><p class="auth-foot">Chưa có tài khoản? <a class="link" href="/register">Đăng ký ngay</a></p><% } else { %><p class="auth-foot">Đã có tài khoản? <a class="link" href="/login">Đăng nhập</a></p><% } %>
+  </div>
+</section>
+<%- include('partials/footer') %>

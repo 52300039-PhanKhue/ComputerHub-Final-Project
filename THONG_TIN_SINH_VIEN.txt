@@ -1,0 +1,18 @@
+THÔNG TIN SINH VIÊN – DỰ ÁN CUỐI KỲ
+=================================
+Họ và tên           : Phan Khuê
+Mã số sinh viên     : 52300039
+Lớp                 : 23050261
+Khóa                : 27
+Ngành               : Kỹ thuật phần mềm
+Trường              : Đại học Tôn Đức Thắng
+Cơ sở               : Phân hiệu Khánh Hòa
+Môn học             : Lập trình Web với Node.js
+Tên dự án           : ComputerHub – E-commerce Website
+Hình thức thực hiện : Cá nhân – một mình, không có thành viên thứ hai
+
+CẦN XÁC MINH VỚI GIẢNG VIÊN
+- Đề PDF quy định nhóm 2–3 người và không cho điểm teamwork nếu làm một mình.
+- LMS dùng tên ZIP theo mẫu hai MSSV; chưa có xác nhận về cách đặt tên cá nhân.
+- Rubrik.docx chính thức; video demo; minh chứng Git có thật (nếu có).
+- Chưa có kết quả kiểm tra đầy đủ với Docker/MongoDB/OAuth/email ở môi trường thật.

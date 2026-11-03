@@ -1,0 +1,29 @@
+<%- include('partials/header',{title:'Thanh toán - ComputerHub'}) %>
+<div class="section-head"><div class="section-head-copy"><span class="kicker">Secure checkout</span><h1 class="page-title">Hoàn tất đơn hàng</h1><p>Ba bước ngắn gọn: giao hàng, ưu đãi và phương thức thanh toán.</p></div></div>
+<div class="checkout-shell">
+  <div class="checkout-main">
+    <div class="checkout-stepper"><div class="step-dot active" data-step="1"><i>1</i> Giao hàng</div><div class="step-dot" data-step="2"><i>2</i> Ưu đãi</div><div class="step-dot" data-step="3"><i>3</i> Thanh toán</div></div>
+    <form id="checkoutForm">
+      <section class="panel checkout-step active" data-step="1">
+        <h2>Thông tin giao hàng</h2><p class="panel-subtitle">Đơn guest vẫn có thể mua mà không cần đăng nhập.</p>
+        <% if(addresses.length){ %><div class="saved-addresses" style="margin-bottom:14px"><label>Địa chỉ đã lưu</label><% addresses.forEach(a=>{ %><button type="button" class="saved-address-btn" data-default="<%= a.is_default ? 1 : 0 %>" data-name="<%= a.recipient_name %>" data-phone="<%= a.phone %>" data-address="<%= a.address_line %>"><b><%= a.label %> <%= a.is_default?'• Mặc định':'' %></b><br><span class="small muted"><%= a.recipient_name %> — <%= a.phone %> — <%= a.address_line %></span></button><% }) %></div><% } %>
+        <div class="form-grid"><div><label>Họ và tên</label><input name="full_name" value="<%= defaultAddress?.recipient_name || user?.full_name || '' %>" placeholder="Nguyễn Văn A" required></div><div><label>Email</label><input type="email" name="email" value="<%= user?.email||'' %>" placeholder="ban@example.com" required></div><div><label>Số điện thoại</label><input name="phone" value="<%= defaultAddress?.phone || '' %>" placeholder="09xxxxxxxx" required></div><div class="full"><label>Địa chỉ giao hàng</label><textarea name="address" placeholder="Số nhà, đường, phường/xã, quận/huyện, tỉnh/thành" required><%= defaultAddress?.address_line || '' %></textarea></div></div>
+        <div class="checkout-nav"><span></span><button type="button" class="btn checkout-next" data-from="1">Tiếp tục →</button></div>
+      </section>
+      <section class="panel checkout-step" data-step="2">
+        <h2>Ưu đãi & điểm thành viên</h2><p class="panel-subtitle">Kiểm tra hiệu lực trước khi đặt hàng để thấy số tiền giảm ngay.</p>
+        <label>Mã giảm giá 5 ký tự</label><div class="inline"><input id="discount" name="discount_code" maxlength="5" placeholder="SAVE5" style="text-transform:uppercase"><button type="button" class="btn secondary" id="checkDiscountBtn">Kiểm tra mã</button></div><div id="discountMsg" class="discount-message"></div>
+        <% if(user){ %><div style="margin-top:16px"><label>Điểm thành viên — bạn có <%= user.loyalty_points %> điểm</label><input type="number" name="points_used" min="0" max="<%= user.loyalty_points %>" value="0"><p class="small muted">Theo yêu cầu đề: 100 điểm tương đương 100.000đ, tức 1 điểm = 1.000đ.</p></div><% } else { %><p class="alert">Bạn đang checkout với tư cách khách. Nếu email chưa có tài khoản, hệ thống sẽ tự tạo tài khoản để lưu đơn hàng.</p><% } %>
+        <div class="checkout-nav"><button type="button" class="btn secondary checkout-prev" data-to="1">← Quay lại</button><button type="button" class="btn checkout-next" data-from="2">Tiếp tục →</button></div>
+      </section>
+      <section class="panel checkout-step" data-step="3">
+        <h2>Phương thức thanh toán</h2><p class="panel-subtitle">Bản demo hỗ trợ COD và chuyển khoản để trình bày quy trình checkout.</p>
+        <label>Chọn phương thức</label><select name="payment_method" required><option value="COD">Thanh toán khi nhận hàng (COD)</option><option value="Bank Transfer">Chuyển khoản ngân hàng</option></select>
+        <div class="secure-note">🔒 Giá và tồn kho sẽ được đối chiếu với MongoDB ngay trước khi đặt. Nếu có thay đổi, bạn cần xem lại và xác nhận lần nữa.</div><p class="small muted">Chuyển khoản ngân hàng trong bản demo chỉ tạo đơn chờ xác nhận, chưa tích hợp cổng thanh toán hoặc xác minh tiền về ngân hàng. Không tự chuyển khoản khi chưa có hướng dẫn chính thức.</p>
+        <div class="checkout-nav"><button type="button" class="btn secondary checkout-prev" data-to="2">← Quay lại</button><button class="btn" type="submit">Xác nhận đặt hàng</button></div>
+      </section>
+    </form>
+  </div>
+  <aside class="panel checkout-summary"><h2>Tóm tắt đơn</h2><div id="checkoutSummary"></div></aside>
+</div>
+<%- include('partials/footer') %>

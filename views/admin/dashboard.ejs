@@ -1,0 +1,23 @@
+<%- include('../partials/header',{title:'Admin Dashboard - ComputerHub'}) %>
+<%- include('_nav') %>
+<div class="admin-head"><div><span class="kicker">Administration</span><h1 class="page-title">Dashboard</h1><p>Tổng quan nhanh về khách hàng, đơn hàng, doanh thu và sản phẩm bán chạy.</p></div><a class="btn secondary" href="/admin/analytics">Xem thống kê nâng cao →</a></div>
+<div class="stat-grid">
+  <article class="stat"><div class="stat-top"><span>Khách hàng</span><i class="stat-icon">◉</i></div><b><%= stats.users %></b><span>Tổng tài khoản customer</span></article>
+  <article class="stat"><div class="stat-top"><span>Khách mới 30 ngày</span><i class="stat-icon">＋</i></div><b><%= stats.newUsers %></b><span>Tài khoản tạo gần đây</span></article>
+  <article class="stat"><div class="stat-top"><span>Đơn hàng</span><i class="stat-icon">▤</i></div><b><%= stats.orders %></b><span>Tất cả trạng thái</span></article>
+  <article class="stat"><div class="stat-top"><span>Doanh thu</span><i class="stat-icon">₫</i></div><b style="font-size:22px"><%= money(stats.revenue) %></b><span>Tổng giá trị đơn</span></article>
+</div>
+<div class="admin-two">
+  <section class="panel"><div class="section-head"><div><h2>Sản phẩm bán chạy</h2><p class="panel-subtitle">Số lượng lấy từ chi tiết đơn hàng.</p></div></div><div class="chart-box"><canvas id="bestChart"></canvas></div></section>
+  <section class="panel"><div class="section-head"><div><h2>Đơn hàng gần đây</h2><p class="panel-subtitle">Mới nhất hiển thị trước.</p></div><a class="link small" href="/admin/orders">Tất cả →</a></div><% if(recentOrders.length){ %><% recentOrders.forEach(o=>{ %><div class="timeline"><div><b><a class="link" href="/admin/orders/<%= o.id %>"><%= o.order_number %></a></b><div class="small muted"><%= o.buyer %> • <%= dateTime(o.created_at) %></div></div><div style="text-align:right"><b><%= money(o.total) %></b><div><span class="status status-<%= o.status %>"><%= o.status %></span></div></div></div><% }) %><% } else { %><div class="empty-state"><p>Chưa có đơn hàng.</p></div><% } %></section>
+</div>
+<script src="/vendor/chartjs/chart.umd.js"></script>
+<script>
+(function(){
+ const canvas=document.getElementById('bestChart'); if(!canvas||!window.Chart)return;
+ const css=()=>getComputedStyle(document.documentElement); let chart;
+ function build(){ if(chart)chart.destroy(); const s=css(); chart=new Chart(canvas,{type:'bar',data:{labels:<%- JSON.stringify(best.map(x=>x.product_name)) %>,datasets:[{label:'Số lượng bán',data:<%- JSON.stringify(best.map(x=>x.qty)) %>,backgroundColor:s.getPropertyValue('--primary').trim(),borderRadius:8}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:s.getPropertyValue('--text-2').trim()}}},scales:{x:{ticks:{color:s.getPropertyValue('--muted').trim()},grid:{display:false}},y:{beginAtZero:true,ticks:{color:s.getPropertyValue('--muted').trim()},grid:{color:s.getPropertyValue('--line').trim()}}}}}); }
+ build(); document.addEventListener('themechange',build);
+})();
+</script>
+<%- include('../partials/footer') %>

@@ -1,0 +1,6 @@
+COMPUTERHUB NODE JS / MONGODB ATLAS - OFFLINE TEST
+Khong ket noi DB; KHONG du dieu kien de ket luan 10 diem.
+PASS: syntax
+PASS: quantity
+PASS: ui-regression
+PASS: rubric-code

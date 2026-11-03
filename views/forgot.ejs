@@ -1,0 +1,6 @@
+<%- include('partials/header',{title:'Khôi phục mật khẩu - ComputerHub'}) %>
+<section class="auth-shell reveal">
+  <aside class="auth-aside"><span class="eyebrow" style="color:#a5f3fc">Account recovery</span><h2>Lấy lại quyền truy cập một cách rõ ràng.</h2><p>Liên kết khôi phục có thời hạn. Trong môi trường local demo, liên kết được in trong Terminal để dễ trình bày.</p></aside>
+  <div class="auth-card"><h1>Khôi phục mật khẩu</h1><p class="muted"><%= token?'Nhập mật khẩu mới tối thiểu 8 ký tự.':'Nhập email tài khoản để tạo liên kết đặt lại mật khẩu.' %></p><% if(typeof message!=='undefined'){ %><div class="alert"><%= message %></div><% } %><% if(token){ %><form method="post"><label>Mật khẩu mới</label><input type="password" name="password" minlength="8" placeholder="Mật khẩu mới" required><button class="btn">Đặt lại mật khẩu</button></form><% } else { %><form method="post"><label>Email</label><input type="email" name="email" placeholder="ban@example.com" required><button class="btn">Tạo liên kết khôi phục</button></form><% } %><p class="auth-foot"><a class="link" href="/login">← Quay lại đăng nhập</a></p></div>
+</section>
+<%- include('partials/footer') %>

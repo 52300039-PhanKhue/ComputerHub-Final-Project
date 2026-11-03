@@ -1,0 +1,8 @@
+HỒ SƠ CÁ NHÂN – PHAN KHUÊ 52300039
+=================================
+Đây là bản nguồn ComputerHub V6.2 dành cho MỘT sinh viên, không có thành viên thứ hai.
+Đề môn học ghi nhóm 2–3 người và làm một mình mất mục teamwork 0.5 điểm.
+Ảnh LMS yêu cầu tên ZIP StudentCode1_StudentCode2_final; chưa có hướng dẫn tên một người.
+Sinh viên xác nhận được phép nộp cá nhân; tên ZIP sử dụng 52300039_final.zip. Tên đề xuất: 52300039_final.zip.
+Không tự khai điểm tối đa, giả minh chứng nhóm, hoặc tạo MSSV khác.
+Bản ZIP hiện tại chỉ gồm source và tài liệu hướng dẫn, chưa có demo.mp4 hay Rubrik.docx chính thức.

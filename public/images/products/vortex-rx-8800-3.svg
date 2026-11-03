@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="620" viewBox="0 0 900 620" role="img" aria-label="VORTEX RX 8800 image 3">
+<defs>
+ <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ef4444" stop-opacity=".26"/><stop offset="1" stop-color="#8b5cf6" stop-opacity=".09"/></linearGradient>
+ <linearGradient id="screen" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ef4444"/><stop offset=".5" stop-color="#111827"/><stop offset="1" stop-color="#8b5cf6"/></linearGradient>
+ <linearGradient id="chip" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ef4444"/><stop offset="1" stop-color="#8b5cf6"/></linearGradient>
+ <filter id="shadow"><feDropShadow dx="0" dy="22" stdDeviation="20" flood-opacity=".25"/></filter>
+</defs>
+<rect width="900" height="620" rx="42" fill="#f8fafc"/><circle cx="90" cy="95" r="180" fill="url(#bg)"/><circle cx="820" cy="550" r="230" fill="url(#bg)"/><path d="M0 520C220 450 440 590 900 460V620H0Z" fill="#ef4444" opacity=".05"/>
+<g filter="url(#shadow)"><g transform="translate(175 111) rotate(1 270 110)"><rect x="0" y="0" width="540" height="220" rx="30" fill="#111827" stroke="#ef4444" stroke-width="8"/><rect x="24" y="22" width="492" height="176" rx="24" fill="#1e293b"/><g fill="#0f172a" stroke="#8b5cf6" stroke-width="7"><circle cx="150" cy="110" r="70"/><circle cx="390" cy="110" r="70"/></g><g stroke="#94a3b8" stroke-width="8"><path d="M150 52v116M92 110h116M390 52v116M332 110h116"/></g><path d="M110 220v26h330v-26" stroke="#eab308" stroke-width="12"/></g></g>
+<rect x="44" y="42" width="118" height="34" rx="17" fill="#ef4444" opacity=".12"/><text x="103" y="65" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#ef4444">COMPUTERHUB</text>
+<text x="450" y="565" text-anchor="middle" font-family="Arial, sans-serif" font-size="25" font-weight="800" fill="#0f172a">VORTEX RX 8800</text>
+</svg>

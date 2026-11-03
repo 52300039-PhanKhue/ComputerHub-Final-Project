@@ -1,0 +1,30 @@
+HƯỚNG DẪN NỘP ĐỒ ÁN NODE.JS – HỒ SƠ CÁ NHÂN (CHỜ GIẢNG VIÊN CHẤP THUẬN)
+============================================================================
+Sinh viên: Phan Khuê – MSSV: 52300039 – Lớp: 23050261 – Khóa: 27
+Ngành: Kỹ thuật phần mềm – Đại học Tôn Đức Thắng, Phân hiệu Khánh Hòa
+Hình thức thực hiện: 01 sinh viên (cá nhân), không có thành viên thứ hai.
+
+THÔNG BÁO LMS (ảnh ngày 30/10/2026):
+- Hạn nộp 23:59 ngày 05/12/2026.
+- Mỗi nhóm nộp một lần, thư mục theo mẫu StudentCode1_StudentCode2_final.
+- Hệ thống yêu cầu nén thư mục chứa source, report, README... thành ZIP.
+
+LƯU Ý ĐẶC BIỆT VỚI BÀI LÀM CÁ NHÂN:
+- Đề PDF ghi các nhóm 2–3 người; người làm một mình không được 0.5 điểm teamwork.
+- CHƯA CÓ XÁC NHẬN giảng viên cho phép nộp cá nhân hoặc dùng định dạng tên ZIP một MSSV.
+- Không tự tạo thành viên thứ hai, MSSV thứ hai hoặc bằng chứng teamwork giả.
+- Tên GỢI Ý để hỏi giảng viên: 52300039_final.zip (CHƯA PHẢI TÊN ĐÃ ĐƯỢC CHẤP THUẬN).
+- Cần hỏi thầy qua Zalo/Discord về chấp thuận làm cá nhân và tên nộp một MSSV.
+
+CẤU TRÚC HỒ SƠ NỘP SAU KHI THẦY XÁC NHẬN TÊN:
+  <ten-thu-muc-thay-xac-nhan>/
+    source/            mã nguồn chạy được, package.json và docker-compose.yml
+    demo.mp4           video tự quay >=1080p có âm thanh, chứng minh hoạt động thật
+    Readme.txt         hướng dẫn setup và tài khoản demo (không chứa secrets)
+    Rubrik.docx        rubric chính thức do thầy phát, tự đánh giá trung thực
+    git/               chỉ minh chứng Git thật NẾU CÓ; không tạo giả
+    Bonus/             chỉ khi có bonus thật
+
+BẢN ZIP NÀY LÀ SOURCE CÁ NHÂN ĐÃ SỬA, KHÔNG PHẢI ZIP HỒ SƠ NỘP ĐỦ ĐIỀU KIỆN.
+Chưa chạy E2E MongoDB, Docker, Google OAuth hay email thật trong môi trường kiểm tra.
+Không nộp .env chứa secrets, node_modules hay mật khẩu thật.
