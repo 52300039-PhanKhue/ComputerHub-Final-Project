@@ -23,6 +23,26 @@ const {
 
 const app = express();
 const server = http.createServer(app);
+
+
+if (process.env.VERCEL) {
+  app.use(async (req, res, next) => {
+    try {
+      await connectMongoDB();
+      next();
+    } catch (error) {
+      console.error('MongoDB connection failed:', error);
+      res.status(503).json({
+        ok: false,
+        mongoReady: false,
+        message: 'Không thể kết nối cơ sở dữ liệu.'
+      });
+    }
+  });
+}
+
+
+
 const io = new Server(server);
 const PORT = Number(process.env.PORT || 3000);
 const JWT_SECRET = process.env.JWT_SECRET || 'dev-secret-change-me';
@@ -1021,4 +1041,7 @@ if (require.main === module) {
   startServer().catch(error => { console.error(error); process.exit(1); });
 }
 
-module.exports = { app, server, startServer };
+module.exports = app;
+module.exports.app = app;
+module.exports.server = server;
+module.exports.startServer = startServer;
